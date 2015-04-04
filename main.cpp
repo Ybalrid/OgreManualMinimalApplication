@@ -50,5 +50,7 @@ int main()
          if(window->isClosed())
              run=false;
     }
+
+    delete root;
     return 0;
 }
