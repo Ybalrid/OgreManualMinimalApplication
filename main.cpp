@@ -16,18 +16,39 @@ int main()
 
 
     //ICI charger les resources
-    
+    //----------sinbad, l'ogre dans le sdk d'ogre...
+    Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./media/Sinbad.zip","Zip");
+
     Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
     Ogre::SceneManager* smgr = root->createSceneManager("DefaultSceneManager", "Le Scene Manager");
     Ogre::Camera* cam = smgr->createCamera("camera");
     Ogre::Viewport* vp = window->addViewport(cam);
+    cam->setNearClipDistance(0.01);
+    cam->setAspectRatio((float)vp->getActualWidth()/(float)vp->getActualHeight());
+    cam->setAutoAspectRatio(true);
     //Cette couleur n'est pas Gay du tout : 
     vp->setBackgroundColour(Ogre::ColourValue(1,0,1));
 
 
     //ICI ajouter des choses dans le scene manager
+    smgr->setAmbientLight(Ogre::ColourValue(.5,.5,.5));
 
-    while(true)
-        root->renderOneFrame();
+    Ogre::SceneNode * node = smgr->getRootSceneNode()->createChildSceneNode();
+    Ogre::Entity* ent = smgr->createEntity("Sinbad.mesh");
+    node->attachObject(ent);
+
+    cam->setPosition(0,0,10);
+    cam->lookAt(Ogre::Vector3::ZERO);
+
+
+    bool run(true);
+    while(run)
+    {
+        
+         Ogre::WindowEventUtilities::messagePump();
+         root->renderOneFrame();
+         if(window->isClosed())
+             run=false;
+    }
     return 0;
 }
