@@ -13,12 +13,19 @@ int main()
 
     
     Ogre::RenderWindow* window = root->initialise(true, "The most epic window of the universe");
+
+
+    //ICI charger les resources
+    
     Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
     Ogre::SceneManager* smgr = root->createSceneManager("DefaultSceneManager", "Le Scene Manager");
     Ogre::Camera* cam = smgr->createCamera("camera");
     Ogre::Viewport* vp = window->addViewport(cam);
     //Cette couleur n'est pas Gay du tout : 
     vp->setBackgroundColour(Ogre::ColourValue(1,0,1));
+
+
+    //ICI ajouter des choses dans le scene manager
 
     while(true)
         root->renderOneFrame();
