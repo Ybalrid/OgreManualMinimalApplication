@@ -1,4 +1,12 @@
+#include <iostream>
 #include <Ogre.h>
+#include <math.h>
+
+void anim(long time, Ogre::SceneNode* node)
+{
+    Ogre::Quaternion q(Ogre::Radian(0.5*3.14*sin(float(time)/1000.0f)), Ogre::Vector3::UNIT_Y);
+    node->setOrientation(q);
+}
 
 int main()
 {
@@ -46,7 +54,7 @@ int main()
     //ICI ajouter des choses dans le scene manager
     
     //éclairaige d'ambiance gris moyen
-    smgr->setAmbientLight(Ogre::ColourValue(.5,.5,.5));
+    smgr->setAmbientLight(Ogre::ColourValue(1,1,1));
 
     //Ajoute un objet dans la scene (ici Sinbad, la mascotte de Ogre)
     //créé un noeud fils du noeud principal
@@ -71,6 +79,8 @@ int main()
     //Boucle de rendu
     while(run)
     {
+        //std::cout << window->getLastFPS() << std::endl;        
+        anim(root->getTimer()->getMilliseconds(), node);
         //Lit les "messages" reçu par la fenetre
         Ogre::WindowEventUtilities::messagePump();
         //Calcule et affiche une frame
@@ -79,6 +89,7 @@ int main()
         if(window->isClosed())
             //Couper la boucle
             run=false;
+
     }
 
     //Désalouer Ogre de la mémoire
