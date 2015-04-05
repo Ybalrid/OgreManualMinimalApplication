@@ -21,17 +21,24 @@ int main()
     Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./media/Sinbad.zip","Zip");
     //Initialise toutes les resources chargés
     Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
+    
+    
     //Déclare un scème manager (graphe de scene, basiquement un arbre contneant des noeud représentant la scene
     Ogre::SceneManager* smgr = root->createSceneManager("DefaultSceneManager", "Le Scene Manager");
+    
     //Ajoute une caméra dans la scene
     Ogre::Camera* cam = smgr->createCamera("camera");
+    
     //Ajoute un viewport dans la fenetre, et attache la caméra dessus
     Ogre::Viewport* vp = window->addViewport(cam);
+    
     //Distance du plan de clip "proche" à 0.01
     cam->setNearClipDistance(0.01);
+    
     //Initialise l'aspect ratio de la caméra
     cam->setAspectRatio((float)vp->getActualWidth()/(float)vp->getActualHeight());
     cam->setAutoAspectRatio(true);
+    
     //Ajoute une couleur de fond "parce que"
     vp->setBackgroundColour(Ogre::ColourValue(1,0,1));
 
@@ -42,16 +49,21 @@ int main()
     smgr->setAmbientLight(Ogre::ColourValue(.5,.5,.5));
 
     //Ajoute un objet dans la scene (ici Sinbad, la mascotte de Ogre)
-    //créé un noeud fis du noeud principal
+    //créé un noeud fils du noeud principal
     Ogre::SceneNode * node = smgr->getRootSceneNode()->createChildSceneNode();
+    
     //Créé une entité a partir de l'objet 3D
     Ogre::Entity* ent = smgr->createEntity("Sinbad.mesh");
+    
     //Attache l'objet au noeud du graphe de scene
     node->attachObject(ent);
+    
     //Place la caméra 10 unité vers l'axe Z (= axe qui sort de l'écran)
     cam->setPosition(0,0,10);
+    
     //fait regarder la camera le point à l'origine de la scene
     cam->lookAt(Ogre::Vector3::ZERO);
+
 
     //Boolean pour éviter de faire une boucle infinie
     bool run(true);
@@ -71,6 +83,7 @@ int main()
 
     //Désalouer Ogre de la mémoire
     delete root;
+    
     //Retourner 0 au système car tout c'est bien passé
     return 0;
 }
