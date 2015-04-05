@@ -6,7 +6,7 @@ Dépot vide d'exemple avec un fichier c++ et un makefile qui compille une aplica
 
 
 Avant de pouvoir compiller; installer les dépendances : 
-```sudo apt-get install libogre-1.9-dev g++ libboost-dev libboost_system-dev libois-dev libpthread-stubs0-dev```
+```sudo apt-get install libogre-1.9-dev g++ libboost-dev libboost-system-dev libois-dev libpthread-stubs0-dev```
 
 
 Avant de pouvoir executer le programme faire : 
